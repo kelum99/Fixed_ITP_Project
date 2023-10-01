@@ -1,0 +1,66 @@
+.form-profile {
+    background: #bae2f0;
+    margin: 5%;
+    padding: 50px;
+    border-radius: 20px;
+    width: 40%;
+    box-shadow: 0px 0px 50px #00000094;
+}
+
+.form-profile h1 {
+    text-align: right;
+    font-family: 'Times New Roman';
+    font-weight: bold;
+    font-size: 40px;
+    margin-top:-20px;
+}
+
+.form-profile h3 {
+    text-align: right;
+    font-family: 'Times New Roman';
+    font-size: 20px;
+}
+
+.form-profile .ant-btn-primary {
+    border-radius: 10px;
+    background: #1890ff;
+    outline: none;
+    border: none;
+    margin-left: 10px;
+}
+
+.main-container-profile {
+    background:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnCancel {
+    margin:0 15px;
+    border-radius: 10px;
+}
+
+.form-profile .ant-popover-inner-content {
+    width: 100%;
+}
+
+.ant-popover-message-title {
+    width: 100%;
+    margin-left: 20px;
+}
+
+.form-profile .ant-input {
+    width: 80%;
+    border-radius: 20px;
+}
+
+.ant-form-item-label {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.form-profile .ant-form-item-label > label {
+    color: rgb(0, 0, 0);
+}
+
+ 

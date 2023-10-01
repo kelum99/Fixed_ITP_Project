@@ -1,0 +1,332 @@
+.positionIMG{
+    margin-left: 40px;
+    margin-top: 0px;
+}
+
+.application-header{
+    color: black;
+    font-family: verdana;
+}
+
+.row{
+    margin-right:25px; 
+}
+
+.applyimage{
+    width: 650px;
+    height: 375px;
+    margin-top: 20px;
+    margin-right: 25px;
+    border-radius: 15px;
+
+}
+
+.formPosition{
+    margin-top: 75px;
+}
+
+#formPosition{
+    margin-bottom: 75px;
+}
+
+.head{
+
+    margin-top: 15px;
+    width: 80px;
+    height: 80px;
+}
+
+.searchBox{
+    
+    width: 285px;
+    border-radius: 8px;
+}
+
+#searchBox{
+    margin-left: 1100px;
+    margin-top: 15px;
+    height: 32px;
+    
+}
+
+.example{
+    margin-left: 1100px;
+}
+
+.f{
+    font-family: verdana;
+}
+
+#vacancyHead{
+    margin-top: -15px;
+    margin-left: 15px;
+}
+
+#jobCards{
+    margin-top: 10px;
+}
+
+.services{
+    max-width: 23rem;
+}
+
+#details{
+    margin-top: 25px;
+    margin-left: 100px;
+    border-style: none;
+}
+
+#detail1{
+     margin-right: 100px;
+}
+
+#detail2{
+    margin-right: 100px;
+}
+
+.vacancies{
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+.vacancies h4{
+    margin-right: 400px;
+}
+
+.ulList{
+    margin-left:20px;
+    font-size: 20px;
+}
+
+.ulList li{
+    margin-left: 65px;
+}
+
+.card{
+    width: 650px;
+    margin-top: 25px;
+}
+
+#cardBody{
+    width: 550px;
+}
+
+#apply-btn{
+    background-color: #07bbb1;
+    width: 80px;
+    margin-left: 100px;
+}
+
+#apply-btn :hover{
+    background-color: #07aaa2;
+    transition-delay: .8s;
+}
+
+#searchbtn{
+    background-color: #07bbb1;
+}
+
+.add-view-btn{
+    background-color: #07bbb1;
+    margin-left: 45px;  
+}
+
+
+* {
+    box-sizing: border-box;
+  }
+  
+.searchcareere{
+    width:250px;
+    height: 35px;
+}
+
+.searchbtn-btns{
+    height: 35px;
+    width: 50px;
+}
+  .searchPosition{
+    margin-top: 20px;
+     margin-right: 20px; 
+  }
+
+  #iconHand{
+      color: rgba(12, 174, 238, 0.678);
+  }
+
+.tableDiv{
+    width: 800px;
+    border-color: black;
+    background-color: white;
+    font-size: 18px;
+    position: relative;
+    margin-left: 550px;
+    margin-top: 25px;
+}
+
+.logo{
+    width: 200px;
+    height: 150px;
+    margin-left: 20%;
+}
+
+#printtable{
+    border-style: none;
+    column-gap: 5rem;    
+}
+
+.AddForm{
+    width: 600px;
+    margin-top: 25px;
+   
+    margin-left: 400px;
+}
+
+.crsTable{
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+        
+}
+.edit-dlt{
+    width:50px;
+    margin: 5%;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: #07bbb1;
+    border-color: #07bbb1;
+}
+.edit-dlt:hover{
+    opacity: 0.5;
+}
+
+.myCourses .ant-btn-primary{
+    background-color: #07bbb1;
+    border-color: #07bbb1;
+}
+
+.Heading{
+    font-size: 40px;
+    font-weight: 550;
+    font-family: Georgia, serif;
+}
+
+.deleteCard{
+    margin-left: 100px;
+}
+
+.ulList li{
+    color: black;
+}
+
+.AddForm Form.item{
+    width: 450px;
+}
+
+.add-header{
+    margin-top: 25px;
+    
+    font-family: Georgia, serif;
+}
+
+.job-add-form{
+    margin-right: 70px;
+    margin-top: 85px;
+}
+
+.AddForm{
+    background-color: #bae2f0;
+    height: auto;
+    padding-top: 25px;
+    border-radius: 25px;
+    margin-top: 25px;
+    margin-left: 10px;
+   
+}
+
+.job-add-form Form.Item{
+    margin-top: 25px;
+}
+
+.add-form-items{
+    margin-top: 25px;
+    margin-right: 35px;
+}
+
+.error-Btn{
+    width: 100px;
+    height: auto;
+}
+
+.notice-In-Application{
+    width: 500px;
+    height: 150px;
+    background-color: rgb(245, 231, 206);
+    margin-top: 50px;
+    margin-left: 50px;
+    border-radius: 15px;
+
+}
+
+.notice-In-Application h6{
+    margin-left: 200px;
+    color: red;
+    font-size: 24px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.notice-In-Application p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: 5.5px;
+}
+
+.notice-In-Application span{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    float: right;
+    margin-top: 20px;
+    margin-right: 5.5px;
+}
+
+.ulList :hover{
+    cursor: pointer;
+}
+
+.searchApplicant{
+    margin-top: 25px;
+    width: 285px;
+    float: right;
+    margin-right: 55px;
+}
+
+.updatetable{
+    width: fit-content;
+}
+.updatevacancy{
+    margin-right:100 ;
+}
+
+#download-job-pdf{
+    background-color: #07bbd1;
+    outline: #07aaa2;
+    color: white;
+    font-size: 16px;
+    width: 140px;
+    height: 45px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 80px;
+    border-radius: 5px;
+}
+
+
+.job-report-Head{
+    float: right;
+    margin-right: 80px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.logoforreport{
+    width: 110px;
+    height: 75px;
+}

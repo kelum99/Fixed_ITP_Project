@@ -1,0 +1,61 @@
+#components-layout-demo-responsive .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 500px;
+  }
+  
+  .site-layout-sub-header-background {
+    background: #fff;
+  }
+  .ant-layout-sider .ant-layout-sider-dark{
+    max-width: 950px;
+    width: 950px;
+  }
+
+  .site-layout-background {
+    background: #fff;
+  }
+
+
+  .ant-layout-sider-children{
+      height: 710px;
+      
+
+  }
+
+  .ant-layout-has-sider{
+    width: 500px;
+  }
+
+
+
+  .adminHeader{
+    color: white;
+    margin-top: 25px;
+    margin-left: 10px;
+    font-size: 25px;
+  }
+
+.adminavatar{
+  color:white;
+  
+  width: 90px;
+  height: 90px;
+  margin-left: 50px;
+  margin-top: 25px;
+}
+.admin-bar-content{
+  margin-top: 50px;
+  margin-left: 0px;
+}
+
+.AdminTopic{
+  color: white;
+  margin-left: 70px;
+  margin-top: 8px;
+}
+
+.listItems{
+  margin-left: 35px;
+}

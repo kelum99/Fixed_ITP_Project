@@ -1,0 +1,57 @@
+.form-areYou {
+    background: #bae2f0;
+    margin: 5%;
+    padding: 50px;
+    border-radius: 20px;
+    width: 40%;
+}
+
+.form-areYou h1 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 50px;
+    color: black;
+    margin-left: 1%;
+}
+
+.main-container-areyou {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.areYou {
+    display:flex;
+    justify-content:space-around;
+    flex-direction:row;
+}
+
+.login-form-forgot {
+    margin-left: 20px;
+    color: blue;
+}
+
+.login-form-forgot:hover {
+    color: black;
+}
+
+.lechead {
+    margin-left:39%;
+    margin-top: 10%;
+    
+}
+
+.areuLec {
+    margin-left: -580px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: -20px;
+}
+
+.areuStd {
+    margin-left: -220px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: -20px;
+}

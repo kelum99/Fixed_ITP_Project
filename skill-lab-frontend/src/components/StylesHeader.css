@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 10vh;
+    background: #1282A2;
+    color: #fff;
+}
+.pages{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    font-weight: 700;
+    align-items: center;
+    font-size: 18px;
+}
+.logo{
+    width: 150px;
+    height: 100px;
+}

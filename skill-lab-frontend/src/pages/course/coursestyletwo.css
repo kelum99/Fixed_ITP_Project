@@ -1,0 +1,173 @@
+.form-questions{
+    background: rgb(202, 220, 245);
+    margin: 5%;
+    padding: 50px;
+    border-radius: 20px;
+    width: 40%;
+}
+.form-questions h1{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 36px;
+    
+}
+.form-questions .ant-input{
+    border-radius: 5px;
+    width: 85%;
+}
+
+.form-questions .ant-form-item .ant-select, .ant-form-item .ant-cascader-picker{
+    width:85%;
+}
+
+.form-questions .ant-select:not(.ant-select-customize-input) .ant-select-selector{
+    border-radius:5px;
+}
+
+.form-questions textarea.ant-input{
+    min-height: 90px;
+}
+.form-questions .ant-form-item-required {
+    font-weight: 500;
+}
+
+.form-questions .ant-btn-primary{
+    border-radius: 10px;
+    background: #185B8C;
+    outline: none;
+    border: none;  
+}
+
+.form-questions .ant-btn{
+cursor: pointer;
+width: 100px;
+}
+
+.main-container-askQuestion{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.main-container-editQuestion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container-createNotice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.allQTable{
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    
+    
+}
+.edit-dlt{
+    width:50px;
+    margin: 5%;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: #185B8C;
+    border-color: #185B8C;
+}
+.edit-dlt:hover{
+    opacity: 0.5;
+}
+.searchbar{
+    margin-top:2%;
+    margin-bottom: 0.2%;
+    margin-right: 5%;
+    margin-left: 75%;
+    width:20%;
+}
+
+.ant-table-content{
+    background-color: rgb(202, 220, 245);
+}
+.allQuestions .ant-btn-primary{
+    background-color: #185B8C;
+    border-color: #185B8C;
+}
+
+.Heading{
+    font-size: 40px;
+    font-weight: 550;
+    font-family: Georgia, serif;
+}
+
+.subHeading{
+    font-size: 15px;
+    font-weight: 550;
+    font-family: Georgia, serif;
+    margin-top: 0%;
+}
+
+.btnAll{
+    width:180px;
+    margin: 5%;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: #185B8C;;
+    border-color: #185B8C;
+}
+
+.btnAll:hover{
+    opacity: 0.5;
+}
+
+.allQTable1{
+    margin-top: 0%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.btnAllN{
+    width:150px;
+    margin: 5%;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: #185B8C;;
+    border-color: #185B8C;
+    margin-left: 15%;
+
+}
+
+.btnAllN:hover{
+    opacity: 0.5;
+}
+
+.allQTable2{
+    margin-top: 0%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.allQTable3{
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.ant-table.ant-table-middle .ant-table-title, .ant-table.ant-table-middle .ant-table-footer, .ant-table.ant-table-middle .ant-table-thead > tr > th, .ant-table.ant-table-middle .ant-table-tbody > tr > td, .ant-table.ant-table-middle tfoot > tr > th, .ant-table.ant-table-middle tfoot > tr > td{
+    padding: 10px;
+    width:15px;
+}
+
+.ant-table-row{
+    text-align:center;
+}
+
+.ant-table-thead > tr > th{
+    background: lightslategray;
+    text-align: center;
+}
