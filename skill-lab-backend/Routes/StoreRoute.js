@@ -3,13 +3,17 @@ const productDetails = require("../Models/productDetails");
 const Cart = require("../Models/Cart");
 const extractToken = require("../TokenExtract");
 const jwt_decode = require('jwt-decode');
+const log4js = require('log4js');
+
+const logger = log4js.getLogger();
+logger.level = 'info';
 
 
 router.post("/productDetails", async (req, res) => {
   try {
     const decodeHeader = jwt_decode(extractToken(req));
     const userID = decodeHeader.data._id;
-    console.log("ID :", userID);
+    logger.info("ID :", userID);
     const product = new productDetails({
       productId: req.body.productId,
       productName: req.body.productName,
@@ -22,12 +26,12 @@ router.post("/productDetails", async (req, res) => {
     if (savedproductDetails) {
       res.status(201).send({ message: "success", data: savedproductDetails });
     } else {
-      res.status(400).send({ message: "failed", data: savedproductDetails });
+      res.status(400).send({ message: "Failed" });
     }
-    console.log("result , ", savedproductDetails);
+    logger.info("result , ", savedproductDetails);
   } catch (err) {
-    console.log("error in store ", err);
-    res.status(500).send({ message: "failed", data: err });
+    logger.error("error in store ", err);
+    res.status(500).send({ message: "Internal Server Error"});
   }
 });
 
@@ -42,8 +46,8 @@ router.get("/product/:id", async (req, res) => {
     const findById = await productDetails.findById(req.params.id);
     res.json(findById);
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -52,8 +56,8 @@ router.get("/product/find/:productName", async (req, res) => {
     const findByName = await productDetails.findOne(req.params);
     res.json(findByName);
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -62,8 +66,8 @@ router.get("/product/findAll/:userID", async (req, res) => {
     const findAll = await productDetails.find(req.params);
     res.json(findAll);
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -71,10 +75,10 @@ router.delete("/product/:id", async (req, res) => {
   try {
     const deleteproductDetails = await productDetails.deleteOne(req.params);
     res.json(deleteproductDetails);
-    console.log("Deleted!");
+    logger.info("Deleted!");
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -86,15 +90,15 @@ router.put("/product/update/:id", async(req, res) => {
                 { _id: req.params.id },
                 { ...data}
             );
-            console.log("Success ", result);
+            logger.info("Success ", result);
             res.status(201).send({ message: "success", data: result});
         }
     else{
         res.status(204).send({ message: "update data can not be empty!" });
     }
     }catch (err){
-        console.log("error in get data", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in get data", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 });
 
@@ -107,12 +111,12 @@ router.post("/Cart", async (req, res) => {
       if (savedCart) {
         res.status(201).send({ message: "success", data: savedCart });
       } else {
-        res.status(400).send({ message: "failed", data: savedCart });
+        res.status(400).send({ message: "Failed"});
       }
-      console.log("result , ", savedCart);
+      logger.info("result , ", savedCart);
     } catch (err) {
-      console.log("error in store ", err);
-      res.status(500).send({ message: "failed", data: err });
+      logger.error("error in store ", err);
+      res.status(500).send({ message: "Internal Server Error"});
     }
   });
 

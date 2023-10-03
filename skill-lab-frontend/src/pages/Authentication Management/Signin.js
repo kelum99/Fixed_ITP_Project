@@ -26,9 +26,28 @@ function Signin() {
   };
 
   const onFinish = async (values) => {
+
+    // const csrfToken = document.cookie
+    //   .split("; ")
+    //   .find((row) => row.startsWith("XSRF-TOKEN"))
+    //   ?.split("=")[1];
+
+
     console.log('Received values of form: ', values);
     try {
+      // const result = await request.post(
+      //   'AuthenticationRoute/login',
+      //   values,
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       "X-XSRF-TOKEN": csrfToken, 
+      //     },
+      //   }
+      // );
+      
       const result = await request.post('AuthenticationRoute/login', values)
+
       if (result.status === 200) {
         await updateToken(result.data.data.token);
         decodeToken(result.data.data.token)

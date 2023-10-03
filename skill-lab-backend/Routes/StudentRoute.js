@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const Enroll = require("../Models/StudentEnroll");
 const Perform = require("../Models/Performance");
+const log4js = require('log4js');
+
+const logger = log4js.getLogger();
+logger.level = 'info';
 
 
 /*Start Enroll API*/
@@ -13,12 +17,12 @@ router.post("/enroll", async (req, res) => {
         if (savedEnroll) {
             res.status(201).send({ message: "success", data: savedEnroll });
         } else {
-            res.status(400).send({ message: "failed", data: savedEnroll });
+            res.status(400).send({ message: "Failed" });
         }
-        console.log("result , ", savedEnroll);
+        logger.info("result , ", savedEnroll);
     } catch (err) {
-        console.log("error in enrolling student ", err);
-        res.status(500).send({ message: "failed", data: err });
+        logger.error("error in enrolling student ", err);
+        res.status(500).send({ message: "Internal Server Error" });
     }
 });
 
@@ -27,10 +31,10 @@ router.get("/mycourses", async (req, res) => {
     try {
         const allMyCourses = await Enroll.find(req.params);
         res.json(allMyCourses);
-        console.log("result , ", allMyCourses);
+        logger.info("result , ", allMyCourses);
     } catch (err) {
-        console.log("error in get enrolled courses", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in get enrolled courses", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 });
 
@@ -39,10 +43,10 @@ router.get("/mycourses/:id", async (req, res) => {
     try {
         const mycourse = await Enroll.findById(req.params.id);
         res.json(mycourse);
-        console.log("result , ", mycourse);
+        logger.info("result , ", mycourse);
     } catch (err) {
-        console.log("error in getting course details", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in getting course details", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 });
 
@@ -51,10 +55,10 @@ router.put("/mycourses/:id", async (req, res) => {
     try {
         const updateEnroll = await Enroll.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.json(updateEnroll);
-        console.log("result , ", updateEnroll);
+        logger.info("result , ", updateEnroll);
     } catch (err) {
-        console.log("error in getting course details", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in getting course details", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 
 });
@@ -64,10 +68,10 @@ router.delete("/mycourses/:id", async (req, res) => {
     try {
         const Unenroll = await Enroll.findByIdAndRemove(req.params.id);
         res.json(Unenroll);
-        console.log("Deleted!");
+        logger.info("Deleted!");
     } catch (err) {
-        console.log("error in deleting", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in deleting", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 });
 
@@ -85,12 +89,12 @@ router.post("/performance", async (req, res) => {
         if (savedPerform) {
             res.status(201).send({ message: "success", data: savedPerform });
         } else {
-            res.status(400).send({ message: "failed", data: savedPerform });
+            res.status(400).send({ message: "Failed" });
         }
-        console.log("result , ", savedPerform);
+        logger.info("result , ", savedPerform);
     } catch (err) {
-        console.log("error in adding marks ", err);
-        res.status(500).send({ message: "failed", data: err });
+        logger.error("error in adding marks ", err);
+        res.status(500).send({ message: "Internal Server Error" });
     }
 });
 
@@ -100,10 +104,10 @@ router.get("/performance", async (req, res) => {
     try {
         const allMarks = await Perform.find(req.params);
         res.json(allMarks);
-        console.log("result , ", allMarks);
+        logger.info("result , ", allMarks);
     } catch (err) {
-        console.log("error in get marks", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in get marks", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 });
 
@@ -112,10 +116,10 @@ router.get("/performance/:id", async (req, res) => {
     try {
         const mark = await Perform.findById(req.params.id);
         res.json(mark);
-        console.log("result , ", mark);
+        logger.info("result , ", mark);
     } catch (err) {
-        console.log("error in getting marks", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in getting marks", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 });
 
@@ -124,10 +128,10 @@ router.put("/performance/:id", async (req, res) => {
     try {
         const updateMark = await Perform.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.json(updateMark);
-        console.log("result , ", updateMark);
+        logger.info("result , ", updateMark);
     } catch (err) {
-        console.log("error in getting course details", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in getting course details", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 
 });
@@ -137,10 +141,10 @@ router.delete("/performance/:id", async (req, res) => {
     try {
         const deleteMark = await Perform.findByIdAndRemove(req.params.id);
         res.json(deleteMark);
-        console.log("Deleted Result Successfully!");
+        logger.info("Deleted Result Successfully!");
     } catch (err) {
-        console.log("error in deleting", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in deleting", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 });
 
