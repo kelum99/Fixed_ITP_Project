@@ -1,15 +1,18 @@
 const router = require("express").Router();
 const CommonSignup = require("../Models/CommonSignup");
 const jwt = require("jsonwebtoken");
-
-
+const bcrypt = require("bcrypt");
 //User Data
 
 //Insert
 router.post("/CommonSignup", async (req, res) => {
   try {
-    
-    const commonSignup = new CommonSignup(req.body);
+    const user = req.body;
+    const password = user.password;
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+
+    const commonSignup = new CommonSignup(user);
     const savedCommonSignup = await commonSignup.save();
     if (savedCommonSignup) {
       res.status(201).send({ message: "success", data: savedCommonSignup });
@@ -37,14 +40,17 @@ router.get("/CommonSignup", async (_, res) => {
   res.json(await CommonSignup.find({}));
 });
 
-
 //Update
 
 router.put("/CommonSignup/update/:id", async (req, res) => {
   try {
-    const updateCommonSignup = await CommonSignup.findByIdAndUpdate(req.params.id,req.body, {new:true});
+    const updateCommonSignup = await CommonSignup.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     res.json(updateCommonSignup);
-    console.log("result,",updateCommonSignup);
+    console.log("result,", updateCommonSignup);
   } catch (err) {
     console.log("error in getting review details", err);
     res.status(204).send({ message: "failed", data: err });
@@ -72,7 +78,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     const result = await CommonSignup.findOne({
-      $and: [{ email }, { inputpw: password }]
+      $and: [{ email }, { inputpw: password }],
     });
     if (result) {
       const token = jwt.sign(
@@ -82,23 +88,21 @@ router.post("/login", async (req, res) => {
             _id: result._id,
             email: result.email,
             nic: result.nic,
-            role: result.role
-          }
+            role: result.role,
+          },
         },
-        "secret"
+        process.env.JWT_SECRETS
       );
-      res
-        .status(200)
-        .send({
-          message: "success",
-          data: {
-            token,
-            _id: result._id,
-            email: result.email,
-            nic: result.nic,
-            role: result.role
-          }
-        });
+      res.status(200).send({
+        message: "success",
+        data: {
+          token,
+          _id: result._id,
+          email: result.email,
+          nic: result.nic,
+          role: result.role,
+        },
+      });
     } else {
       res.status(401).send({ message: "Check email or password" });
     }
@@ -109,5 +113,3 @@ router.post("/login", async (req, res) => {
   }
 });
 module.exports = router;
-
-

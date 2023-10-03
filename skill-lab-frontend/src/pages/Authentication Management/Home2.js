@@ -3,32 +3,37 @@ import { Form, Button } from "antd";
 import "antd/dist/antd.css";
 import "./stylesHome.css";
 import home from "../../Images/home.png";
-import { useHistory} from 'react-router-dom';
-import useRequest from '../../services/RequestContext';
-import useUser from '../../services/UserContext';
+import { useHistory } from "react-router-dom";
+import useRequest from "../../services/RequestContext";
+import useUser from "../../services/UserContext";
+import { googleLogout } from "@react-oauth/google";
 
 function Home2() {
   const { updateToken } = useRequest();
-  const {setUser} = useUser();
+  const { setUser } = useUser();
   const history = useHistory();
-  
-  const logout = async() => {
-         await updateToken();
-         setUser({});
-         history.push('/signin')
-         window.location.reload();
+
+  const logout = async () => {
+    await updateToken();
+    googleLogout();
+    setUser({});
+    history.push("/signin");
+    window.location.reload();
   };
-  
+
   return (
     <>
       <div className="main-container-home">
         <Form>
           <Form.Item>
-          
-              <Button type="primary" htmlType="submit" className="btnLogout" onClick={logout}>
-                LOGOUT
-              </Button>
-            
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="btnLogout"
+              onClick={logout}
+            >
+              LOGOUT
+            </Button>
           </Form.Item>
 
           <Form.Item>
