@@ -1,7 +1,10 @@
 const router = require("express").Router();
 const Contact = require("../Models/Contact");
 const Review = require("../Models/Review");
+const log4js = require('log4js');
 
+const logger = log4js.getLogger();
+logger.level = 'info';
 
 /*Insert Contact us form details */
 router.post("/contact", async (req, res) => {
@@ -11,12 +14,12 @@ router.post("/contact", async (req, res) => {
     if (savedContact) {
       res.status(201).send({ message: "success", data: savedContact });
     } else {
-      res.status(400).send({ message: "failed", data: savedContact });
+      res.status(400).send({ message: "Failed" });
     }
-    console.log("result , ", savedContact);
+    logger.info("result , ", savedContact);
   } catch (err) {
-    console.log("error in Contact details ", err);
-    res.status(500).send({ message: "failed", data: err });
+   logger.error("error in Contact details ", err);
+    res.status(500).send({ message:"Internal Server Error"});
   }
 });
 
@@ -30,10 +33,10 @@ router.post("/review", async (req, res) => {
     } else {
       res.status(400).send({ message: "failed", data: savedReview });
     }
-    console.log("result , ", savedReview);
+   logger.info("result , ", savedReview);
   } catch (err) {
-    console.log("error in reviews ", err);
-    res.status(500).send({ message: "failed", data: err });
+   logger.error("error in reviews ", err);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
 
@@ -43,8 +46,8 @@ router.get("/review/findAll", async (req, res) => {
     const findAll = await Review.find(req.params);
     res.json(findAll);
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+   logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -54,8 +57,8 @@ router.get("/review/findAll/:stid", async (req, res) => {
     const findAll = await Review.find(req.params);
     res.json(findAll);
   } catch (err) {
-    console.log("error in geting review details", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in geting review details", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -64,10 +67,10 @@ router.get("/review/:id", async (req, res) => {
   try {
       const review = await Review.findById(req.params.id);
       res.json(review);
-      console.log("result , ", review);
+      logger.info("result , ", review);
   } catch (err) {
-      console.log("error in getting marks", err);
-      res.status(204).send({ message: "failed", data: err });
+      logger.error("error in getting marks", err);
+      res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -76,10 +79,10 @@ router.put("/review/:id", async (req, res) => {
   try {
     const UpdateReview = await Review.findByIdAndUpdate(req.params.id,req.body, {new:true});
     res.json(UpdateReview);
-    console.log("result, ", UpdateReview);
+    logger.info("result, ", UpdateReview);
   } catch (err) {
-    console.log("error in getting review details", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in getting review details", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -88,10 +91,10 @@ router.delete("/review/:id", async (req, res) => {
   try {
     const deleteReview = await Review.findByIdAndRemove(req.params.id);
     res.json(deleteReview);
-    console.log("Deleted!");
+    logger.info("Deleted!");
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -101,8 +104,8 @@ router.get("/contact/findAll", async (req, res) => {
     const findAll = await Contact.find(req.params);
     res.json(findAll);
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -111,10 +114,10 @@ router.delete("/contact/:id", async (req, res) => {
   try {
     const deleteContact= await Contact.findByIdAndRemove(req.params.id);
     res.json(deleteContact);
-    console.log("Deleted!");
+    logger.info("Deleted!");
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 

@@ -2,6 +2,10 @@ const router = require("express").Router();
 const { findById } = require("../Models/Applicant");
 const Applicant = require("../Models/Applicant");
 const Careere = require("../Models/Careere");
+const log4js = require('log4js');
+
+const logger = log4js.getLogger();
+logger.level = 'info';
 
 //-------------------------careere-----------------------------------//
 
@@ -13,12 +17,12 @@ router.post("/job", async (req, res) => {
     if (savedCareere) {
       res.status(201).send({ message: "success", data: savedCareere });
     } else {
-      res.status(400).send({ message: "failed", data: savedCareere });
+      res.status(400).send({ message: "Failed"});
     }
-    console.log("result , ", savedCareere);
+    logger.info("result , ", savedCareere);
   } catch (err) {
-    console.log("error in careere ", err);
-    res.status(500).send({ message: "failed", data: err });
+    logger.error("error in careere ", err);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
 
@@ -29,8 +33,8 @@ router.get("/job/:id", async (req, res) => {
       const findById = await Careere.findById(req.params.id);
       res.json(findById);
     } catch (err) {
-      console.log("error in get data", err);
-      res.status(204).send({ message: "failed", data: err });
+      logger.error("error in get data", err);
+      res.status(204).send({ message: "Operation Failed" });
     }
   });
 
@@ -40,8 +44,8 @@ router.get("/job/:id", async (req, res) => {
       const findByName = await Careere.findOne(req.params);
       res.json(findByName);
     } catch (err) {
-      console.log("error in get data", err);
-      res.status(204).send({ message: "failed", data: err });
+      logger.error("error in get data", err);
+      res.status(204).send({ message: "Operation Failed" });
     }
   });
 
@@ -50,10 +54,10 @@ router.get("/job/:id", async (req, res) => {
     try {
         const careereview = await Careere.find(req.params);
         res.json(careereview);
-        console.log("result , ", careereview);
+        logger.info("result , ", careereview);
     } catch (err) {
-        console.log("error in get career view", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in get career view", err);
+        res.status(204).send({ message: "Operation Failed" });
     }
 });
 
@@ -67,10 +71,10 @@ router.get("/job/:id", async (req, res) => {
     try {
       const deleteCareere = await Careere.findByIdAndRemove(req.params.id);
       res.json(deleteCareere);
-      console.log("Deleted!");
+      logger.info("Deleted!");
     } catch (err) {
-      console.log("error in get data", err);
-      res.status(204).send({ message: "failed", data: err });
+      logger.error("error in get data", err);
+      res.status(204).send({ message: "Operation Failed" });
     }
   });
 
@@ -81,10 +85,10 @@ router.put("/updatejob/:id", async (req, res) => {
   try {
       const deleteCareere = await Careere.findByIdAndUpdate(req.params.id, req.body, { new: true });
       res.json(deleteCareere);
-      console.log("result , ", deleteCareere);
+      logger.info("result , ", deleteCareere);
   } catch (err) {
-      console.log("error in getting career details", err);
-      res.status(204).send({ message: "failed", data: err });
+      logger.error("error in getting career details", err);
+      res.status(204).send({ message: "Operation Failed" });
   }
 
 });
@@ -106,12 +110,12 @@ router.put("/updatejob/:id", async (req, res) => {
       if (savedApplicant) {
         res.status(201).send({ message: "success", data: savedApplicant });
       } else {
-        res.status(400).send({ message: "failed", data: savedApplicant });
+        res.status(400).send({ message: "Failed" });
       }
-      console.log("result , ", savedApplicant);
+      logger.info("result , ", savedApplicant);
     } catch (err) {
-      console.log("error in Apply ", err);
-      res.status(500).send({ message: "failed", data: err });
+      logger.error("error in Apply ", err);
+      res.status(500).send({ message: "Internal Server Error" });
     }
   });
 
@@ -121,8 +125,8 @@ router.put("/updatejob/:id", async (req, res) => {
       const findById = await Applicant.findById(req.params.id);
       res.json(findById);
     } catch (err) {
-      console.log("error in get data", err);
-      res.status(204).send({ message: "failed", data: err });
+      logger.error("error in get data", err);
+      res.status(204).send({ message: "Operation Failed" });
     }
   });
 
@@ -132,8 +136,8 @@ router.put("/updatejob/:id", async (req, res) => {
       const findByName = await Applicant.findOne(req.params);
       res.json(findByName);
     } catch (err) {
-      console.log("error in get data", err);
-      res.status(204).send({ message: "failed", data: err });
+      logger.error("error in get data", err);
+      res.status(204).send({ message: "Operation Failed" });
     }
   });
 
@@ -143,8 +147,8 @@ router.put("/updatejob/:id", async (req, res) => {
         const findAll = await Applicant.find(req.params);
         res.json(findAll);
       } catch (err) {
-        console.log("error in get data", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in get data", err);
+        res.status(204).send({ message: "Operation Failed" });
       }
     });
 
@@ -163,10 +167,10 @@ router.put("/updatejob/:id", async (req, res) => {
       try {
         const deleteApplicant = await Applicant.findByIdAndRemove(req.params.id);
         res.json(deleteApplicant);
-        console.log("Deleted!");
+        logger.info("Deleted!");
       } catch (err) {
-        console.log("error in get data", err);
-        res.status(204).send({ message: "failed", data: err });
+        logger.error("error in get data", err);
+        res.status(204).send({ message: "Operation Failed" });
       }
     });
 
@@ -176,10 +180,10 @@ router.put("/updateapplicant/:id", async (req, res) => {
   try {
       const updateEnroll = await Enroll.findByIdAndUpdate(req.params.id, req.body, { new: true });
       res.json(updateEnroll);
-      console.log("result , ", updateEnroll);
+      logger.info("result , ", updateEnroll);
   } catch (err) {
-      console.log("error in getting course details", err);
-      res.status(204).send({ message: "failed", data: err });
+      logger.error("error in getting course details", err);
+      res.status(204).send({ message: "Operation Failed" });
   }
 
 });
@@ -189,10 +193,10 @@ router.delete("/mycourses/:id", async (req, res) => {
   try {
       const Unenroll = await Enroll.findByIdAndRemove(req.params.id);
       res.json(Unenroll);
-      console.log("Deleted!");
+      logger.info("Deleted!");
   } catch (err) {
-      console.log("error in deleting", err);
-      res.status(204).send({ message: "failed", data: err });
+      logger.error("error in deleting", err);
+      res.status(204).send({ message: "Operation Failed" });
   }
 });
 
