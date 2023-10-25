@@ -3,17 +3,17 @@ import React, {
   createContext,
   useContext,
   useMemo,
-  useEffect
+  useEffect,
 } from "react";
 import axios from "axios";
 
 export const RequestContext = createContext({});
 
-export const RequestContextProvider = props => {
+export const RequestContextProvider = (props) => {
   const { children, baseURL } = props;
   const [token, setToken] = useState();
 
-  const updateToken = async value => {
+  const updateToken = async (value) => {
     if (value) {
       setToken(value);
       localStorage.setItem("token", value);
@@ -36,19 +36,15 @@ export const RequestContextProvider = props => {
       return axios.create({
         baseURL,
         timeout: 10000,
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
     } else {
       return axios.create({
         baseURL,
         timeout: 10000,
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
     }
-    return axios.create({
-      baseURL,
-      timeout: 300000
-    });
   }, [baseURL, token]);
   return (
     <RequestContext.Provider value={{ request, token, updateToken }}>

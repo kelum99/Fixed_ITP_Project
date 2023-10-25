@@ -1,28 +1,31 @@
 const router = require("express").Router();
 const CommonSignup = require("../Models/CommonSignup");
 const jwt = require("jsonwebtoken");
+const log4js = require("log4js");
 const bcrypt = require("bcrypt");
+
+const logger = log4js.getLogger();
 //User Data
 
 //Insert
 router.post("/CommonSignup", async (req, res) => {
   try {
     const user = req.body;
-    const password = user.password;
+    const password = user.inputpw;
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
+    user.inputpw = await bcrypt.hash(password, salt);
 
     const commonSignup = new CommonSignup(user);
     const savedCommonSignup = await commonSignup.save();
     if (savedCommonSignup) {
       res.status(201).send({ message: "success", data: savedCommonSignup });
     } else {
-      res.status(400).send({ message: "failed", data: savedCommonSignup });
+      res.status(400).send({ message: "Failed" });
     }
-    console.log("result , ", savedCommonSignup);
+    logger.info("result , ", savedCommonSignup);
   } catch (err) {
-    console.log("error in CommonSignup ", err);
-    res.status(500).send({ message: "failed", data: err });
+    logger.error("error in CommonSignup", err);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
 
@@ -31,8 +34,8 @@ router.get("/CommonSignup/:id", async (req, res) => {
     const findById = await CommonSignup.findById(req.params.id);
     res.json(findById);
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Falied" });
   }
 });
 
@@ -52,8 +55,8 @@ router.put("/CommonSignup/update/:id", async (req, res) => {
     res.json(updateCommonSignup);
     console.log("result,", updateCommonSignup);
   } catch (err) {
-    console.log("error in getting review details", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in getting review details", err);
+    res.status(204).send({ message: "Operation Falied" });
   }
 });
 
@@ -65,10 +68,10 @@ router.delete("/CommonSignup/:id", async (req, res) => {
       req.params.id
     );
     res.json(deleteCommonSignup);
-    console.log("Deleted!");
+    logger.info("Deleted!");
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Falied" });
   }
 });
 
@@ -106,10 +109,10 @@ router.post("/login", async (req, res) => {
     } else {
       res.status(401).send({ message: "Check email or password" });
     }
-    console.log("login succes ", result);
+    logger.info("login succes ", result);
   } catch (err) {
-    console.log("login requsee eror ", err);
-    res.status(500).send({ message: "failed", data: err });
+    logger.error("login requsee error", err);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
 module.exports = router;

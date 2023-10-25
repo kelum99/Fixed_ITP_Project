@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Checkbox, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
@@ -10,6 +10,7 @@ import useUser from "../../services/UserContext";
 import { Redirect } from "react-router";
 import { useHistory } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 function Signin() {
   const { request, updateToken } = useRequest();
@@ -29,6 +30,7 @@ function Signin() {
     console.log("Received values of form: ", values);
     try {
       const result = await request.post("AuthenticationRoute/login", values);
+
       if (result.status === 200) {
         await updateToken(result.data.data.token);
         decodeToken(result.data.data.token);
@@ -67,6 +69,9 @@ function Signin() {
               }}
               onFinish={onFinish}
             >
+              {/* <Form.Item name="_csrf">
+                <Input type="hidden" value={csrfToken} />
+              </Form.Item> */}
               <Form.Item
                 name="email"
                 rules={[

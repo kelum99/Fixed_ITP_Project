@@ -6,6 +6,10 @@ const WithdrawHistory= require("../Models/WithdrawHistory");
 const FinanceAnalysis= require("../Models/IncomeExpense");
 const extractToken = require("../TokenExtract");
 const jwt_decode = require('jwt-decode');
+const log4js = require('log4js');
+
+const logger = log4js.getLogger();
+logger.level = 'info';
 
 //Wallet Routing
 //Insert
@@ -13,7 +17,7 @@ router.post("/wallet", async (req, res) => {
   try {
     const decodeHeader = jwt_decode(extractToken(req));
     const userID = decodeHeader.data._id;
-    console.log("header",decodeHeader);
+    logger.info("header",decodeHeader);
     const wallet = new Wallet({
       nickName: req.body.nickName,
       name: req.body.name,
@@ -26,12 +30,12 @@ router.post("/wallet", async (req, res) => {
     if (savedWallet) {
       res.status(201).send({ message: "success", data: savedWallet });
     } else {
-      res.status(400).send({ message: "failed", data: savedWallet });
+      res.status(400).send({ message: "Failed" });
     }
-    console.log("result , ", savedWallet);
+    logger.info("result , ", savedWallet);
   } catch (err) {
-    console.log("error in wallet ", err);
-    res.status(500).send({ message: "failed", data: err });
+    logger.error("error in wallet ", err);
+    res.status(500).send({ message: "Interanl Server Error" });
   }
 });
 
@@ -42,8 +46,8 @@ router.get("/wallet/findAll/:userID", async (req, res) => {
     const findAll = await Wallet.find(req.params);
     res.json(findAll);
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+   logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -52,10 +56,10 @@ router.delete("/wallet/:id", async (req, res) => {
   try {
     const deleteWallet = await Wallet.deleteOne(req.params);
     res.json(deleteWallet);
-    console.log("Deleted!");
+    logger.info("Deleted!");
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -68,14 +72,14 @@ router.put("/wallet/update/:id", async (req, res) => {
         { _id: req.params.id },
         { ...data }
       );
-      console.log("Success ", result);
+      logger.info("Success ", result);
       res.status(201).send({ message: "success", data: result });
     } else {
       res.status(204).send({ message: "update data can not be empty!" });
     }
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -85,7 +89,7 @@ router.post("/bank", async (req, res) => {
   try {
     const decodeHeader = jwt_decode(extractToken(req));
     const userID = decodeHeader.data._id;
-    console.log("header",decodeHeader);
+    logger.info("header",decodeHeader);
     const bank = new Bank({
       name: req.body.name,
       accountNumber: req.body.accountNumber,
@@ -97,12 +101,12 @@ router.post("/bank", async (req, res) => {
     if (savedBank) {
       res.status(201).send({ message: "success", data: savedBank });
     } else {
-      res.status(400).send({ message: "failed", data: savedBank });
+      res.status(400).send({ message: "Failed" });
     }
-    console.log("result , ", savedBank);
+    logger.info("result , ", savedBank);
   } catch (err) {
-    console.log("error in wallet ", err);
-    res.status(500).send({ message: "failed", data: err });
+    logger.error("error in wallet ", err);
+    res.status(500).send({ message: "Interanl Server Error"});
   }
 });
 
@@ -112,8 +116,8 @@ router.get("/bank/findAll/:userID", async (req, res) => {
     const findAll = await Bank.find(req.params);
     res.json(findAll);
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -128,15 +132,15 @@ router.put("/bank/update/:id", async (req, res) => {
         { _id: id},
         { ...data }
       );
-      console.log("Success ", result);
+      logger.info("Success ", result);
       res.status(201).send({ message: "success", data: result });
     } else {
       res.status(204).send({ message: "update data can not be empty!" });
     }
   
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -145,10 +149,10 @@ router.delete("/bank/:id", async (req, res) => {
   try {
     const deleteBank = await Bank.deleteOne(req.params);
     res.json(deleteBank);
-    console.log("Deleted!");
+    logger.info("Deleted!");
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
@@ -160,12 +164,12 @@ router.post("/paymentHistory", async (req, res) => {
     if (savedPHistory) {
       res.status(201).send({ message: "success", data: savedPHistory });
     } else {
-      res.status(400).send({ message: "failed", data: savedPHistory });
+      res.status(400).send({ message: "Failed" });
     }
-    console.log("result , ", savedPHistory);
+    logger.info("result , ", savedPHistory);
   } catch (err) {
-    console.log("error in wallet ", err);
-    res.status(500).send({ message: "failed", data: err });
+    logger.error("error in wallet ", err);
+    res.status(500).send({ message: "Interanl Server Error"});
   }
 });
 
@@ -177,12 +181,12 @@ router.post("/withdrawHistory", async (req, res) => {
     if (savedWHistory) {
       res.status(201).send({ message: "success", data: savedWHistory });
     } else {
-      res.status(400).send({ message: "failed", data: savedWHistory });
+      res.status(400).send({ message: "Failed" });
     }
-    console.log("result , ", savedWHistory);
+    logger.info("result , ", savedWHistory);
   } catch (err) {
-    console.log("error in wallet ", err);
-    res.status(500).send({ message: "failed", data: err });
+    logger.error("error in wallet ", err);
+    res.status(500).send({ message: "Interanl Server Error" });
   }
 });
 
@@ -194,12 +198,12 @@ router.post("/financeAnalysis", async (req, res) => {
     if (savedFA) {
       res.status(201).send({ message: "success", data: savedFA});
     } else {
-      res.status(400).send({ message: "failed", data: savedFA });
+      res.status(400).send({ message: "Failed" });
     }
-    console.log("result , ", savedFA);
+    logger.info("result , ", savedFA);
   } catch (err) {
-    console.log("error in wallet ", err);
-    res.status(500).send({ message: "failed", data: err });
+    logger.error("error in wallet ", err);
+    res.status(500).send({ message: "Interanl Server Error" });
   }
 });
 
@@ -214,8 +218,8 @@ router.get("/financeAnalysis/find/:month", async (req, res) => {
     const findByName = await FinanceAnalysis.find(req.params);
     res.json(findByName);
   } catch (err) {
-    console.log("error in get data", err);
-    res.status(204).send({ message: "failed", data: err });
+    logger.error("error in get data", err);
+    res.status(204).send({ message: "Operation Failed" });
   }
 });
 
